@@ -1,0 +1,21 @@
+[core]
+	# CRLF => LF (il me semble)
+	autocrlf = input
+	editor = nano
+
+[alias]
+	tree = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	f = fetch --prune --prune-tags --force
+	ll = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cgreen\\ [%cn]" --decorate --date=short
+	aliases =! git config -l | grep alias | cut -c 7-
+	coma = commit --amend --all -C HEAD
+	please =! git push --force-with-lease
+	dead =! git coma && git please
+        bc = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+	cush =! "git add --all && git commit -m \"This is a commit\" && git push"
+	tej =! sh -c 'git branch -D $0 && git push --delete origin $0'
+	bonk =! "git fetch -p && for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do git branch -D $branch; done"
+
+[push]
+	autoSetupRemote = true
+
